@@ -1,4 +1,8 @@
 const mongoose = require(`mongoose`);
-mongoose.connect(
-  "mongodb+srv://teraclito:Z8GLgCI7fIURLpRi@cluster0.il4voxd.mongodb.net/goriInmobiliaria"
-);
+mongoose.connect(process.env.MONGO_URL, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("base de dato ok");
+  }
+});
