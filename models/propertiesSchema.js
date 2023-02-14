@@ -3,7 +3,7 @@ const PropertiesSchema = new mongoose.Schema({
   name: { type: String, trim: true, required: true },
   type: { type: String, trim: true, required: true },
   price: { type: Number, trim: true, required: true },
-  images_URL: { type: Array, required: true },
+  images_URL: { type: [String], required: true },
   description: { type: String, trim: true, required: true },
   location: { type: String, trim: true, required: true },
   state: { type: String, trim: true, required: true },
