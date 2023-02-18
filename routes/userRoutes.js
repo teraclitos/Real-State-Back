@@ -39,6 +39,6 @@ router.post(
   ],
   loginUser
 );
-router.get("/logout", auth(["admin", "user"]), logoutUser);
+router.get("/logout", auth([process.env.SUPER_USER, "user"]), logoutUser);
 
 module.exports = router;

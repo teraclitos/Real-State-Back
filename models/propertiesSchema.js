@@ -1,16 +1,16 @@
 const mongoose = require(`mongoose`);
 const PropertiesSchema = new mongoose.Schema({
-  name: { type: String, trim: true, required: true },
-  type: { type: String, trim: true, required: true },
-  price: { type: Number, trim: true, required: true },
-  images_URL: { type: [String], required: true },
-  description: { type: String, trim: true, required: true },
-  location: { type: String, trim: true, required: true },
-  state: { type: String, trim: true, required: true },
-  adress: { type: String, trim: true, required: true },
-  antiquity: { type: String, trim: true, required: true },
-  totalSurface: { type: Number, trim: true },
-  landSurface: { type: Number, trim: true },
+  name: { type: String, trim: true, requiere: true },
+  type: { type: String, trim: true, requiere: true },
+  price: { type: Number, trim: true, requiere: true },
+  images_URL: { type: Array },
+  description: { type: String, trim: true, requiere: true },
+  location: { type: String, trim: true, requiere: true },
+  state: { type: String, trim: true, requiere: true },
+  adress: { type: String, trim: true, requiere: true },
+  antiquity: { type: Number, trim: true, requiere: true },
+  totalSurface: { type: Number, trim: true, requiere: true },
+  landSurface: { type: Number, trim: true, requiere: true },
   highlight: { type: Boolean, default: false },
 });
 const PropertiesModel = mongoose.model("property", PropertiesSchema);
