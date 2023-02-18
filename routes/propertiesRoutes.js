@@ -2,11 +2,11 @@ const router = require("express").Router();
 const propertiesControllers = require("../controllers/propertiesControllers");
 const { body } = require("express-validator");
 const auth = require("../middlewars/auth");
-const upload = require("../index");
+// const upload = require("../index");
 
 router.post(
   "/create",
-  upload,
+  // upload,
   // auth(process.env.SUPER_USER),
 
   [

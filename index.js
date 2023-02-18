@@ -16,14 +16,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(`dev`));
 app.use(cors());
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, `/public/uploads`),
-  filename: (req, file, cb) => {
-    cb(null, uuidv4() + path.extname(file.originalname));
-  },
-});
-const upload = multer({ storage }).array(`images`, 15);
-module.exports = upload;
+// const storage = multer.diskStorage({
+//   destination: path.join(__dirname, `/public/uploads`),
+//   filename: (req, file, cb) => {
+//     cb(null, uuidv4() + path.extname(file.originalname));
+//   },
+// });
+// const upload = multer({ storage }).array(`images`, 15);
+// module.exports = upload;
 
 // app.get(`/`, (req, res) => {
 //   res.render(`index`);
