@@ -3,12 +3,10 @@ const app = express();
 const morgan = require(`morgan`);
 const cors = require(`cors`);
 const path = require(`path`);
+
+require("dotenv").config();
+
 require("./dataBase");
-
-if (process.env.NODE_ENV !== `production`) {
-  require("dotenv").config();
-}
-
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
