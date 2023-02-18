@@ -2,7 +2,7 @@ const express = require(`express`);
 const app = express();
 const morgan = require(`morgan`);
 const cors = require(`cors`);
-const path = require(`path`);
+// const path = require(`path`);
 
 if (process.env.NODE_ENV !== `production`) {
   require("dotenv").config();
