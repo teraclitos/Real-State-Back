@@ -4,8 +4,9 @@ const morgan = require(`morgan`);
 const cors = require(`cors`);
 const path = require(`path`);
 
-require("dotenv").config();
-
+if (process.env.NODE_ENV !== `production`) {
+  require("dotenv").config();
+}
 require("./dataBase");
 const PORT = process.env.PORT || 3001;
 
@@ -24,4 +25,5 @@ app.use("/", routes);
 
 app.listen(PORT, () => {
   console.log("back ejecutandose en el puerto: ", PORT);
+  console.log("enviroment:", process.env.NODE_ENV);
 });

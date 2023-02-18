@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon  index.js"
+    "start": "cross-env NODE_ENV=production  node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon  index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +14,13 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.34.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
+    "env": "^0.0.2",
     "express": "^4.18.2",
     "express-validator": "^6.14.3",
     "fs-extra": "^11.1.0",
+    "i": "^0.3.7",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
