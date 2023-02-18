@@ -24,5 +24,4 @@ app.use("/", routes);
 
 app.listen(PORT, () => {
   console.log("back ejecutandose en el puerto: ", PORT);
-  console.log("enviroment:", process.env.NODE_ENV);
 });
