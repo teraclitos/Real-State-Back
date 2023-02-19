@@ -20,7 +20,7 @@ app.use(cors());
 // });
 
 const routes = require("./routes");
-app.use("/public", express.static(path.join(__dirname, `../public/uploads`)));
+app.use("/public", express.static(path.join(__dirname, `/public/uploads`)));
 app.use("/", routes);
 
 app.listen(PORT, () => {
