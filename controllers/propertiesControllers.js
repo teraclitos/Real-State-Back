@@ -41,17 +41,17 @@ exports.createProperty = async (req, res) => {
     landSurface === "" &&
     images.length < 1
   ) {
-    // req.files.forEach((element, i) => {
-    //   fs.unlink(element.path);
-    // });
+    req.files.forEach((element, i) => {
+      fs.unlink(element.path);
+    });
     return res.status(422).json({
       msg: "Formulario Totalmente Vacio. Se debe completar campos OBLIGATORIOS del formulario",
     });
   } else {
     if (existProperty) {
-      // req.files.forEach((element, i) => {
-      //   fs.unlink(element.path);
-      // });
+      req.files.forEach((element, i) => {
+        fs.unlink(element.path);
+      });
       res.status(400).json({ msg: "propiedad duplicada" });
     } else {
       if (images.length < 1) {
@@ -61,9 +61,9 @@ exports.createProperty = async (req, res) => {
       }
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        // req.files.forEach((element, i) => {
-        //   fs.unlink(element.path);
-        // });
+        req.files.forEach((element, i) => {
+          fs.unlink(element.path);
+        });
         return res.status(422).json({ errors: errors.array() });
       }
       const arrayURLD = [];
