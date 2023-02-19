@@ -9,17 +9,17 @@ if (process.env.NODE_ENV !== `production`) {
 }
 require("./dataBase");
 const PORT = process.env.PORT || 3001;
-// app.set(`views`, path.join(__dirname, `views`));
-// app.set("view engine", "pug");
+app.set(`views`, path.join(__dirname, `views`));
+app.set("view engine", "pug");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(`dev`));
 app.use(cors());
 
-// app.get(`/`, (req, res) => {
-//   res.render(`index`);
-// });
+app.get(`/`, (req, res) => {
+  res.render(`index`);
+});
 
 const routes = require("./routes");
 
