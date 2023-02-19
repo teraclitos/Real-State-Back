@@ -1,19 +1,11 @@
 {
   "version": 2,
   "name": "gori-inmobiliaria",
-  "builds": [{ "use": "@vercel/static-build", "src": "package.json" }],
+  "builds": [{ "use": "@vercel/node", "src": "package.json" }],
   "routes": [
     {
-      "src": "(.*).js",
-      "dest": "/$1.js"
-    },
-    {
-      "src": "(.*).json",
-      "dest": "/$1.json"
-    },
-    {
-      "src": "/.*",
-      "dest": "index.html"
+      "src": "/(.*)",
+      "dest": "index.js"
     }
   ]
 }
