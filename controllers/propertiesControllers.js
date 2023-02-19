@@ -1,9 +1,13 @@
 const PropertiesModel = require("../models/propertiesSchema");
 const { validationResult } = require("express-validator");
-
+const cloudinary = require("cloudinary");
 const fs = require(`fs-extra`);
 
-
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
+});
 exports.createProperty = async (req, res) => {
   const {
     price,
@@ -62,51 +66,56 @@ exports.createProperty = async (req, res) => {
         });
         return res.status(422).json({ errors: errors.array() });
       }
-      const arrayURLD = [];
-      const arrayURLO = [];
-
-      
-      req.files.forEach((element, i) => {
-       
-        arrayURLD.push({
-          url: element.path,
-         
-          original_name: element.originalname.split(".")[0],
-          order: parseInt(element.originalname.split(".")[0].split("-")[1]),
-          
-        });
-      });
 
       try {
-       
-        if (arrayURLD.length === req.files.length) {
-          arrayURLD.forEach((element, i) => {
-            arrayURLD.forEach((element1) => {
-              if (element1.order === i + 1) {
-                arrayURLO.push(element1);
+        const arrayURLD = [];
+        const arrayURLO = [];
+        await req.files.forEach((element, i) => {
+          cloudinary.v2.uploader
+            .upload(element.path)
+            .then((result) => {
+              arrayURLD.push({
+                url: result.url,
+                original_name: element.originalname.split(".")[0],
+                order: parseInt(
+                  element.originalname.split(".")[0].split("-")[1]
+                ),
+                public_id: result.public_id,
+              });
+              fs.unlink(element.path);
+            })
+
+            .then(() => {
+              if (arrayURLD.length === req.files.length) {
+                arrayURLD.forEach((element, i) => {
+                  arrayURLD.forEach((element1) => {
+                    if (element1.order === i + 1) {
+                      arrayURLO.push(element1);
+                    }
+                  });
+                });
+              }
+            })
+            .then(async () => {
+              if (arrayURLD.length === req.files.length) {
+                const newProperty = new PropertiesModel({
+                  price,
+                  name,
+                  description,
+                  type,
+                  location,
+                  state,
+                  adress,
+                  antiquity,
+                  totalSurface,
+                  landSurface,
+                  images_URL: arrayURLO,
+                });
+                await newProperty.save();
+                res.status(201).json({ msg: "Propiedad Creada Correctamente" });
               }
             });
-          });
-        }
-      
-        if (arrayURLD.length === req.files.length) {
-          const newProperty = new PropertiesModel({
-            price,
-            name,
-            description,
-            type,
-            location,
-            state,
-            adress,
-            antiquity,
-            totalSurface,
-            landSurface,
-            images_URL: arrayURLO,
-          });
-          await newProperty.save();
-          res.status(201).json({ msg: "Propiedad Creada Correctamente" });
-        }
-       
+        });
       } catch (error) {
         res.status(500).json({ msg: error });
       }
@@ -188,7 +197,7 @@ exports.deleteOneProperty = async (req, res) => {
     });
 
     deleteProp.images_URL.forEach((element) => {
-      fs.unlink(element.url);
+      cloudinary.v2.uploader.destroy(element.public_id);
     });
 
     if (deleteProp) {
