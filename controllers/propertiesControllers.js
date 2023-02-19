@@ -196,13 +196,10 @@ exports.deleteOneProperty = async (req, res) => {
     const deleteProp = await PropertiesModel.findByIdAndDelete({
       _id: req.params.id,
     });
-    req.files.forEach((element, i) => {
-      fs.unlink(element.path);
-    });
 
-    // deleteProp.images_URL.forEach((element) => {
-    //   cloudinary.v2.uploader.destroy(element.public_id);
-    // });
+    deleteProp.images_URL.forEach((element) => {
+      fs.unlink(element.url);
+    });
 
     if (deleteProp) {
       res.status(200).json({ msg: "Propiedad Eliminada" });

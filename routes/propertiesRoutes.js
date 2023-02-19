@@ -47,6 +47,7 @@ router.put(
 );
 router.delete(
   "/delete:id",
+
   auth(process.env.SUPER_USER),
   propertiesControllers.deleteOneProperty
 );
