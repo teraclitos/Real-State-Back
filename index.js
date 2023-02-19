@@ -14,13 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(`dev`));
 app.use(cors());
+app.use(express.static(path.join(__dirname, `public`)));
 
 // app.get(`/`, (req, res) => {
 //   res.render(`index`);
 // });
 
 const routes = require("./routes");
-app.use("/public", express.static(path.join(__dirname, `/public/uploads`)));
+
 app.use("/", routes);
 
 app.listen(PORT, () => {
