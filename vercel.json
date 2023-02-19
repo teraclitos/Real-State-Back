@@ -2,9 +2,9 @@
   "version": 2,
   "name": "gori-inmobiliaria",
   "builds": [
-    { "use": "@vercel/node", "src": "package.json" },
+    { "use": "@vercel/node", "src": "./public" },
     {
-      "src": "index.js",
+      "src": "./public",
       "use": "@vercel/node"
     }
   ],
@@ -12,6 +12,10 @@
     {
       "src": "/(.*)",
       "dest": "index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public"
     }
   ]
 }
