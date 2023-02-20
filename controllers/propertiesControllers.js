@@ -38,8 +38,8 @@ exports.createProperty = async (req, res) => {
     adress === "" &&
     antiquity === "" &&
     totalSurface === "" &&
-    landSurface === "" &&
-    images.length < 1
+    landSurface === ""
+    // images.length < 1
   ) {
     req.files.forEach((element, i) => {
       fs.unlink(element.path);
@@ -54,11 +54,11 @@ exports.createProperty = async (req, res) => {
       });
       res.status(400).json({ msg: "propiedad duplicada" });
     } else {
-      if (images.length < 1) {
-        return res.status(422).json({
-          msg: "Campo imagenes vacio",
-        });
-      }
+      // if (images.length < 1) {
+      //   return res.status(422).json({
+      //     msg: "Campo imagenes vacio",
+      //   });
+      // }
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         req.files.forEach((element, i) => {
@@ -86,34 +86,34 @@ exports.createProperty = async (req, res) => {
             })
 
             .then(() => {
-              if (arrayURLD.length === req.files.length) {
-                arrayURLD.forEach((element, i) => {
-                  arrayURLD.forEach((element1) => {
-                    if (element1.order === i + 1) {
-                      arrayURLO.push(element1);
-                    }
-                  });
+              // if (arrayURLD.length === req.files.length) {
+              arrayURLD.forEach((element, i) => {
+                arrayURLD.forEach((element1) => {
+                  if (element1.order === i + 1) {
+                    arrayURLO.push(element1);
+                  }
                 });
-              }
+              });
+              // }
             })
             .then(async () => {
-              if (arrayURLD.length === req.files.length) {
-                const newProperty = new PropertiesModel({
-                  price,
-                  name,
-                  description,
-                  type,
-                  location,
-                  state,
-                  adress,
-                  antiquity,
-                  totalSurface,
-                  landSurface,
-                  images_URL: arrayURLO,
-                });
-                await newProperty.save();
-                res.status(201).json({ msg: "Propiedad Creada Correctamente" });
-              }
+              // if (arrayURLD.length === req.files.length) {
+              const newProperty = new PropertiesModel({
+                price,
+                name,
+                description,
+                type,
+                location,
+                state,
+                adress,
+                antiquity,
+                totalSurface,
+                landSurface,
+                images_URL: arrayURLO,
+              });
+              await newProperty.save();
+              res.status(201).json({ msg: "Propiedad Creada Correctamente" });
+              // }
             });
         });
       } catch (error) {
