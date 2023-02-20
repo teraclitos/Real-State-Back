@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "headers": [
-    {
-      "public": true
-    }
-  ],
+
+  "public": true,
+
   "builds": [
     {
       "src": "index.js",
