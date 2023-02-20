@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "headers": [
+    {
+      "public": true
+    }
+  ],
   "builds": [
     {
       "src": "index.js",
@@ -10,9 +15,6 @@
     {
       "src": "/(.*)",
       "dest": "index.js"
-    },
-    {
-      "public": true
     }
   ]
 }
