@@ -10,6 +10,9 @@
     {
       "src": "/(.*)",
       "dest": "index.js"
+    },
+    {
+      "public": true
     }
   ]
 }
