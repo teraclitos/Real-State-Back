@@ -14,7 +14,7 @@
     }
   ],
   "functions": {
-    "api/test.js": {
+    "api/cloudinary.js": {
       "memory": 3008,
       "maxDuration": 30
     },
