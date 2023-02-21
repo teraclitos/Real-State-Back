@@ -3,8 +3,6 @@ const app = express();
 const morgan = require(`morgan`);
 const cors = require(`cors`);
 const path = require(`path`);
-const multer = require(`multer`);
-const { v4: uuidv4 } = require("uuid");
 
 if (process.env.NODE_ENV !== `production`) {
   require("dotenv").config();
@@ -16,14 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(`dev`));
 app.use(cors());
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, `public/uploads`),
-  filename: (req, file, cb) => {
-    cb(null, uuidv4() + path.extname(file.originalname));
-  },
-});
+
 app.use("/public", express.static(path.join(__dirname, "public/uploads")));
-app.use(multer({ storage }).array(`images`, 15));
 
 const routes = require("./routes");
 
