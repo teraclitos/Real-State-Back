@@ -22,11 +22,9 @@ const storage = multer.diskStorage({
     cb(null, uuidv4() + path.extname(file.originalname));
   },
 });
+// app.use("/public", express.static(path.join(__dirname, "public/uploads")));
 app.use(multer({ storage }).array(`images`, 15));
-app.use(
-  "/public/uploads",
-  express.static(path.join(__dirname, "public/uploads"))
-);
+
 const routes = require("./routes");
 
 app.use("/", routes);
