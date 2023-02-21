@@ -2,7 +2,7 @@ const router = require("express").Router();
 const propertiesControllers = require("../controllers/propertiesControllers");
 const { body } = require("express-validator");
 const auth = require("../middlewars/auth");
-const upload = require("../api/multer");
+const upload = require("../middlewars/multer");
 
 router.post(
   "/create",
