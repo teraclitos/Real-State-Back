@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const fs = require(`fs-extra`);
 const cloudinary = require("../api/cloudinary");
 
-exports.createProperty = async (req, res) => {
+exports.createProperty = async (req, res, next) => {
   const {
     price,
     name,
