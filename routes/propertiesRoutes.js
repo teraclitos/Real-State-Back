@@ -2,12 +2,12 @@ const router = require("express").Router();
 const propertiesControllers = require("../controllers/propertiesControllers");
 const { body } = require("express-validator");
 const auth = require("../middlewars/auth");
-const upload = require("../middlewars/multer");
+const uploadFile = require("../middlewars/multer");
 
 router.post(
   "/create",
   auth(process.env.SUPER_USER),
-  upload.array(`images`, 15),
+  uploadFile(),
   [
     body("price", "Campo Precio Vacio").notEmpty(),
     body("name", "Campo Nombre Vacio").notEmpty(),

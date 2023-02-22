@@ -77,7 +77,7 @@ exports.createProperty = async (req, res, next) => {
                 ),
                 public_id: result.public_id,
               });
-              // fs.unlink(element.path);
+              fs.unlink(element.path);
             })
 
             .then(() => {
