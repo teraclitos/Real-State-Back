@@ -2,27 +2,12 @@ const router = require("express").Router();
 const propertiesControllers = require("../controllers/propertiesControllers");
 const { body } = require("express-validator");
 const auth = require("../middlewars/auth");
-const multer = require(`multer`);
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
-
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, `../uploads`),
-  filename: (req, file, cb) => {
-    cb(null, uuidv4() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage }).array(`images`, 15);
-
-// const upload = require("../middlewars/multer");
+const upload = require("../middlewars/multer");
 
 router.post(
   "/create",
   upload,
-
   auth(process.env.SUPER_USER),
-
   [
     body("price", "Campo Precio Vacio").notEmpty(),
     body("name", "Campo Nombre Vacio").notEmpty(),
