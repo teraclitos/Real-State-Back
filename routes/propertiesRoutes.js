@@ -3,22 +3,11 @@ const propertiesControllers = require("../controllers/propertiesControllers");
 const { body } = require("express-validator");
 const auth = require("../middlewars/auth");
 const uploadFile = require("../middlewars/multer");
-const multer = require(`multer`);
 
 router.post(
   "/create",
   auth(process.env.SUPER_USER),
-  (req, res, next) => {
-    uploadFile()(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        res.send("un error a ocurrido en multer");
-      } else if (err) {
-        res.send("un error desconocido a ocurrido en multer");
-      }
-      res.send("todo a salido bien");
-    });
-    next();
-  },
+  uploadFile(),
   [
     body("price", "Campo Precio Vacio").notEmpty(),
     body("name", "Campo Nombre Vacio").notEmpty(),
