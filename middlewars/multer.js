@@ -10,7 +10,7 @@ module.exports = uploadFile = () => {
     },
   });
 
-  const upload = multer({ storage }).array(`images`, 15);
+  const upload = multer({ storage }).array(`images`);
 
   return upload;
 };
