@@ -11,7 +11,7 @@ const PropertiesSchema = new mongoose.Schema({
   antiquity: { type: Number, trim: true, requiere: true },
   totalSurface: { type: Number, trim: true, requiere: true },
   landSurface: { type: Number, trim: true, requiere: true },
-  highlight: { type: String, default: `falso` },
+  highlight: { type: String, default: `NO` },
 });
 const PropertiesModel = mongoose.model("property", PropertiesSchema);
 module.exports = PropertiesModel;
