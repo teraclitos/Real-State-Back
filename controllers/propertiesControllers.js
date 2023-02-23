@@ -104,6 +104,7 @@ exports.createProperty = async (req, res, next) => {
                   antiquity,
                   totalSurface,
                   landSurface,
+                  highlight,
                   images_URL: arrayURLO,
                 });
                 await newProperty.save();
@@ -148,6 +149,7 @@ exports.modifyOneProperty = async (req, res) => {
     antiquity,
     totalSurface,
     landSurface,
+    highlight,
   } = req.body;
   const errors = validationResult(req);
 
