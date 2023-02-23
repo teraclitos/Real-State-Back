@@ -15,6 +15,7 @@ exports.createProperty = async (req, res, next) => {
     antiquity,
     totalSurface,
     landSurface,
+    highlight,
   } = req.body;
 
   const existProperty = await PropertiesModel.findOne({
