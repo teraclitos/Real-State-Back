@@ -102,7 +102,7 @@ exports.createProperty = async (req, res, next) => {
               }
             })
             .then(async () => {
-              if (arrayURLD.length === req.files.length) {
+              if (arrayURLO.length === req.files.length) {
                 const newProperty = new PropertiesModel({
                   price,
                   name,
@@ -119,6 +119,13 @@ exports.createProperty = async (req, res, next) => {
                 });
                 await newProperty.save();
                 res.status(201).json({ msg: "Propiedad Creada Correctamente" });
+              } else if (
+                arrayURLO.length !== req.files.length &&
+                arrayURLD.length === req.files.length
+              ) {
+                res
+                  .status(400)
+                  .json({ msg: "no respeto el orden de las imagenes" });
               }
             });
         });

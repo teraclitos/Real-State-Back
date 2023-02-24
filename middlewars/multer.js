@@ -11,6 +11,20 @@ if (process.env.NODE_ENV === `production`) {
 
 module.exports = uploadFile = () => {
   const storage = multer.diskStorage({
+    fileFilter: (req, file, cb) => {
+      const filetypes = `/jpeg|png|jpg/`;
+      const mimetypes = filetypes.test(mimetypes);
+      const extname = filetypes.test(path.extname(file.originalname));
+
+      console.log(mimetypes);
+      console.log(extname);
+
+      if (mimetypes && extname) {
+        return cb(null, true);
+      } else {
+        ("error:formato de imagen incorrecto");
+      }
+    },
     destination: path.join(__dirname, folder),
     filename: (req, file, cb) => {
       cb(null, uuidv4() + path.extname(file.originalname));

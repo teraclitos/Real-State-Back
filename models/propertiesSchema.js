@@ -1,4 +1,5 @@
 const mongoose = require(`mongoose`);
+
 const PropertiesSchema = new mongoose.Schema({
   name: { type: String, trim: true, requiere: true },
   type: { type: String, trim: true, requiere: true },
@@ -12,6 +13,7 @@ const PropertiesSchema = new mongoose.Schema({
   totalSurface: { type: Number, trim: true, requiere: true },
   landSurface: { type: Number, trim: true, requiere: true },
   highlight: { type: String, default: `NO` },
+  date: { type: Date, default: Date.now() },
 });
 const PropertiesModel = mongoose.model("property", PropertiesSchema);
 module.exports = PropertiesModel;

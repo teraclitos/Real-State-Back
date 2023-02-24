@@ -7,6 +7,7 @@ const uploadFile = require("../middlewars/multer");
 router.post(
   "/create",
   auth(process.env.SUPER_USER),
+
   uploadFile(),
   [
     body("price", "Campo Precio Vacio").notEmpty(),
