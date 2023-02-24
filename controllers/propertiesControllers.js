@@ -68,10 +68,19 @@ exports.createProperty = async (req, res, next) => {
         const arrayURLO = [];
         await req.files.forEach((element, i) => {
           cloudinary.v2.uploader
-            .upload(element.path)
+            .upload(element.path, {
+              folder: `gori-inmobiliaria`,
+              transformation: {
+                width: 700,
+                crop: "fill",
+                fetch_format: "auto",
+                quality: "auto",
+                gravity: "auto",
+              },
+            })
             .then((result) => {
               arrayURLD.push({
-                url: result.url,
+                url: result.secure_url,
                 original_name: element.originalname.split(".")[0],
                 order: parseInt(
                   element.originalname.split(".")[0].split("-")[1]
