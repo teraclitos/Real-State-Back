@@ -1,4 +1,5 @@
 const mongoose = require(`mongoose`);
+const mongoosePagination = require("mongoose-paginate-v2");
 
 const PropertiesSchema = new mongoose.Schema({
   name: { type: String, trim: true, requiere: true },
@@ -15,5 +16,7 @@ const PropertiesSchema = new mongoose.Schema({
   highlight: { type: String, default: `NO` },
   date: { type: Date, default: Date.now() },
 });
+
+PropertiesSchema.plugin(mongoosePagination);
 const PropertiesModel = mongoose.model("property", PropertiesSchema);
 module.exports = PropertiesModel;

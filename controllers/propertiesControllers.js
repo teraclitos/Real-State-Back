@@ -136,8 +136,9 @@ exports.createProperty = async (req, res, next) => {
   }
 };
 exports.getAllProperties = async (req, res) => {
+  const options = req.query;
   try {
-    const allProperties = await PropertiesModel.find();
+    const allProperties = await PropertiesModel.paginate({}, options);
     res.status(200).json(allProperties);
   } catch (error) {
     console.log("error", error);
