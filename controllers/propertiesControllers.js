@@ -44,7 +44,7 @@ exports.createProperty = async (req, res, next) => {
       msg: "Formulario Totalmente Vacio. Se debe completar campos OBLIGATORIOS del formulario",
     });
   } else {
-    if (existProperty) {
+    if (!existProperty) {
       req.files.forEach((element, i) => {
         fs.unlink(element.path);
       });
@@ -136,9 +136,36 @@ exports.createProperty = async (req, res, next) => {
   }
 };
 exports.getAllProperties = async (req, res) => {
-  const options = req.query;
+  const limit = req.query.limit;
+  const page = req.query.page;
+  const type = req.query.type;
+  const name = req.query.name;
+  const inf = req.query.inf;
+  const sup = req.query.sup;
+
+  const options = {};
+
+  if (type) {
+    options.type = type;
+  }
+  if (name) {
+    options.name = name;
+  }
+  if (inf && !sup) {
+    options.price = { $gte: inf };
+  }
+  if (sup && !inf) {
+    options.price = { $lte: sup };
+  }
+  if (inf && sup) {
+    options.$and = [{ price: { $gte: inf } }, { price: { $lte: sup } }];
+  }
+
   try {
-    const allProperties = await PropertiesModel.paginate({}, options);
+    const allProperties = await PropertiesModel.paginate(options, {
+      limit: limit,
+      page: page,
+    });
     res.status(200).json(allProperties);
   } catch (error) {
     console.log("error", error);
