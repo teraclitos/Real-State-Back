@@ -44,7 +44,7 @@ exports.createProperty = async (req, res, next) => {
       msg: "Formulario Totalmente Vacio. Se debe completar campos OBLIGATORIOS del formulario",
     });
   } else {
-    if (!existProperty) {
+    if (existProperty) {
       req.files.forEach((element, i) => {
         fs.unlink(element.path);
       });
