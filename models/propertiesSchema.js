@@ -11,8 +11,8 @@ const PropertiesSchema = new mongoose.Schema({
   state: { type: String, trim: true, requiere: true },
   adress: { type: String, trim: true, requiere: true },
   antiquity: { type: Number, trim: true, requiere: true },
-  totalSurface: { type: Number, trim: true },
-  landSurface: { type: Number, trim: true, requiere: true },
+  totalSurface: { type: Number, trim: true, requiere: true },
+  landSurface: { type: Number, trim: true },
   highlight: { type: String, default: `NO` },
   date: { type: Date, default: Date.now() },
 });

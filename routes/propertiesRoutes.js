@@ -16,8 +16,7 @@ router.post(
     body("price", "Campo Precio Vacio").notEmpty(),
     body("antiquity", "Campo Antiguedad Vacio").notEmpty(),
     body("state", "Campo Estado Vacio").notEmpty(),
-  
-    body("landSurface", "Campo Superficie Del Terreno  Vacio").notEmpty(),
+    body("totalSurface", "Campo Superficie Total Vacio").notEmpty(),
     body("location", "Campo Localidad Vacio").notEmpty(),
     body("adress", "Campo Direccion Vacio").notEmpty(),
   ],
@@ -37,8 +36,7 @@ router.put(
     body("price", "Campo Precio Vacio").notEmpty(),
     body("antiquity", "Campo Antiguedad Vacio").notEmpty(),
     body("state", "Campo Estado Vacio").notEmpty(),
-   
-    body("landSurface", "Campo Superficie Del Terreno  Vacio").notEmpty(),
+    body("totalSurface", "Campo Superficie Total Vacio").notEmpty(),
     body("location", "Campo Localidad Vacio").notEmpty(),
     body("adress", "Campo Direccion Vacio").notEmpty(),
   ],
