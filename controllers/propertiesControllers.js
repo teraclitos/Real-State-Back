@@ -139,7 +139,7 @@ exports.getAllProperties = async (req, res) => {
   const limit = req.query.limit;
   const page = req.query.page;
   const type = req.query.type;
-  const name = req.query.name;
+  const location = req.query.location;
   const inf = req.query.inf;
   const sup = req.query.sup;
 
@@ -148,8 +148,8 @@ exports.getAllProperties = async (req, res) => {
   if (type) {
     options.type = type;
   }
-  if (name) {
-    options.name = name;
+  if (location) {
+    options.location = location;
   }
   if (inf && !sup) {
     options.price = { $gte: inf };
