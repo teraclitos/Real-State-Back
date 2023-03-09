@@ -142,6 +142,7 @@ exports.getAllProperties = async (req, res) => {
   const location = req.query.location;
   const inf = req.query.inf;
   const sup = req.query.sup;
+  const highlight = req.query.highlight;
 
   const options = {};
 
@@ -150,6 +151,9 @@ exports.getAllProperties = async (req, res) => {
   }
   if (location) {
     options.location = location;
+  }
+  if (highlight) {
+    options.highlight = highlight;
   }
   if (inf && !sup) {
     options.price = { $gte: inf };
