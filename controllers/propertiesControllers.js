@@ -152,9 +152,7 @@ exports.getAllProperties = async (req, res) => {
   if (location) {
     options.location = location;
   }
-  if (highlight) {
-    options.highlight = highlight;
-  }
+
   if (inf && !sup) {
     options.price = { $gte: inf };
   }
@@ -171,6 +169,19 @@ exports.getAllProperties = async (req, res) => {
       page: page,
     });
     res.status(200).json(allProperties);
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+exports.getHighlightProperties = async (req, res) => {
+  const highlight = req.query.highlight;
+
+  try {
+    const highlightProperties = await PropertiesModel.find({
+      highlight: highlight,
+    });
+    res.status(200).json(highlightProperties);
   } catch (error) {
     console.log("error", error);
   }

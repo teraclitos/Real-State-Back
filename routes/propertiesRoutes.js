@@ -24,6 +24,7 @@ router.post(
 );
 
 router.get("/show", propertiesControllers.getAllProperties);
+router.get("/show/highlight", propertiesControllers.getHighlightProperties);
 router.get("/show:id", propertiesControllers.getOneProperty);
 router.put(
   "/modify:id",
