@@ -72,7 +72,7 @@ exports.createProperty = async (req, res, next) => {
               folder: `gori-inmobiliaria`,
               transformation: {
                 width: 700,
-                height: 500,
+                height: 700,
                 crop: "fill",
                 fetch_format: "auto",
                 quality: "auto",
