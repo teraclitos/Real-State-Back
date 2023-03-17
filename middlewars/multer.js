@@ -13,11 +13,10 @@ module.exports = uploadFile = () => {
   const storage = multer.diskStorage({
     fileFilter: (req, file, cb) => {
       const filetypes = `/jpeg|png|jpg/`;
-      const mimetypes = filetypes.test(mimetypes);
-      const extname = filetypes.test(path.extname(file.originalname));
-
-      console.log(mimetypes);
-      console.log(extname);
+      const mimetypes = filetypes.test(mimetypes.toLowerCase());
+      const extname = filetypes.test(
+        path.extname(file.originalname).toLowerCase()
+      );
 
       if (mimetypes && extname) {
         return cb(null, true);

@@ -22,6 +22,10 @@ exports.createProperty = async (req, res, next) => {
     name: req.body.name,
   });
 
+  const highlights = await PropertiesModel.find({ highlight: "YES" });
+
+  console.log(highlights);
+
   const images = req.files;
 
   if (
@@ -44,6 +48,11 @@ exports.createProperty = async (req, res, next) => {
       msg: "Formulario Totalmente Vacio. Se debe completar campos OBLIGATORIOS del formulario",
     });
   } else {
+    if (highlights.length === 4 && highlight === "YES") {
+      return res.status(422).json({
+        msg: "Sólo puede haber 4 propiedades destacadas",
+      });
+    }
     if (existProperty) {
       req.files.forEach((element, i) => {
         fs.unlink(element.path);
@@ -214,6 +223,14 @@ exports.modifyOneProperty = async (req, res) => {
   } = req.body;
   const errors = validationResult(req);
 
+  const highlights = await PropertiesModel.find({ highlight: "YES" });
+  const toModify = await PropertiesModel.findOne({ _id: req.params.id });
+
+  const allPropertiesWithoutToModify = await PropertiesModel.find({
+    _id: { $ne: req.params.id },
+  });
+
+  console.log(allPropertiesWithoutToModify);
   if (
     price === "" &&
     name === "" &&
@@ -233,6 +250,24 @@ exports.modifyOneProperty = async (req, res) => {
   } else {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
+    }
+    if (
+      highlights.length === 4 &&
+      highlight === "YES" &&
+      toModify.highlight === "NO"
+    ) {
+      return res.status(422).json({
+        msg: "Sólo puede haber 4 propiedades destacadas",
+      });
+    }
+    if (
+      allPropertiesWithoutToModify.filter(
+        (element) => element.name.toLowerCase() === name.toLowerCase()
+      ).length > 0
+    ) {
+      return res.status(422).json({
+        msg: "Esta propiedad ya existe",
+      });
     }
 
     try {
