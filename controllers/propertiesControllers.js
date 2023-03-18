@@ -57,7 +57,7 @@ exports.createProperty = async (req, res, next) => {
       req.files.forEach((element, i) => {
         fs.unlink(element.path);
       });
-      res.status(400).json({ msgDuplicate: "propiedad duplicada" });
+      res.status(400).json({ msg: "propiedad duplicada" });
     } else {
       if (images.length < 1) {
         return res.status(422).json({
