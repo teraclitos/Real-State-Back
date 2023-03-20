@@ -57,7 +57,9 @@ exports.createProperty = async (req, res, next) => {
       req.files.forEach((element, i) => {
         fs.unlink(element.path);
       });
-      res.status(400).json({ msg: "propiedad duplicada" });
+      res.status(400).json({
+        msg: "El nombre de esta propiedad ya existe. El nombre debe ser un dato único ",
+      });
     } else {
       if (images.length < 1) {
         return res.status(422).json({
@@ -180,7 +182,7 @@ exports.getAllProperties = async (req, res) => {
     });
     res.status(200).json(allProperties);
   } catch (error) {
-    console.log("error", error);
+    res.status(500).json({ msg: error });
   }
 };
 
@@ -193,7 +195,7 @@ exports.getHighlightProperties = async (req, res) => {
     });
     res.status(200).json(highlightProperties);
   } catch (error) {
-    console.log("error", error);
+    res.status(500).json({ msg: error });
   }
 };
 
@@ -202,7 +204,7 @@ exports.getOneProperty = async (req, res) => {
     const getOneProp = await PropertiesModel.findOne({ _id: req.params.id });
     res.status(200).json(getOneProp);
   } catch (error) {
-    console.log("error", error);
+    res.status(500).json({ msg: error });
   }
 };
 
@@ -266,7 +268,7 @@ exports.modifyOneProperty = async (req, res) => {
       ).length > 0
     ) {
       return res.status(422).json({
-        msg: "Esta propiedad ya existe",
+        msg: "El nombre de esta propiedad ya existe. El nombre debe ser un dato único ",
       });
     }
 
@@ -278,7 +280,7 @@ exports.modifyOneProperty = async (req, res) => {
       );
       res.status(200).json(modifyProp);
     } catch (error) {
-      console.log("error", error);
+      res.status(500).json({ msg: error });
     }
   }
 };
@@ -299,6 +301,6 @@ exports.deleteOneProperty = async (req, res) => {
       res.status(400).json({ msg: "Propiedad no encontrada" });
     }
   } catch (error) {
-    console.log("error", error);
+    res.status(500).json({ msg: error });
   }
 };

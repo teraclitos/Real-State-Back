@@ -30,7 +30,7 @@ exports.userRegister = async (req, res) => {
     newUser.save();
     res.status(201).json({ msg: "Usuario Creado Correctamente" });
   } catch (error) {
-    console.log("error user", error);
+    res.status(500).json({ msg: error });
   }
 };
 
@@ -75,7 +75,7 @@ exports.loginUser = async (req, res) => {
     await userModel.updateOne({ username }, userExist);
     res.status(200).json({ token: userExist.token });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ msg: error });
   }
 };
 
@@ -87,6 +87,6 @@ exports.logoutUser = async (req, res) => {
     );
     res.json({ mensaje: "Deslogueo ok" });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ msg: error });
   }
 };
