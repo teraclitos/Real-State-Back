@@ -53,13 +53,13 @@ exports.loginUser = async (req, res) => {
     const userExist = await userModel.findOne({ username });
 
     if (!userExist) {
-      res.status(404).json({ message: "usuario y/o contraseña incorrecto" });
+      res.status(404).json({ msg: "usuario y/o contraseña incorrecto" });
     }
 
     const passCheck = await bcryptjs.compare(password, userExist.password);
 
     if (!passCheck) {
-      res.status(404).json({ message: "usuario y/o contraseña incorrecto" });
+      res.status(404).json({ msg: "usuario y/o contraseña incorrecto" });
     }
 
     const datosUsuarioParaToken = {
