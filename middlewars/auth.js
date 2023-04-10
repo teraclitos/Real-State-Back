@@ -11,10 +11,10 @@ module.exports = (role) => async (req, res, next) => {
       res.status(401).json({ msg: "No estas autorizado" });
     } else if (Array.isArray(role) && !role.includes(verify.user.role)) {
       res.status(401).json({ msg: "No estas autorizado" });
+    } else {
+      (res.locals.user = userLogin), (res.locals.token = token);
+      next();
     }
-
-    (res.locals.user = userLogin), (res.locals.token = token);
-    next();
   } catch (error) {
     res.status(500).json({ msg: "Fallo Server", error });
   }

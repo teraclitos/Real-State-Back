@@ -6,7 +6,7 @@ let folder = "";
 if (process.env.NODE_ENV === `production`) {
   folder = `../../../tmp`;
 } else {
-  folder = `/tmp`;
+  folder = `../tmp`;
 }
 
 module.exports = uploadFile = () => {
