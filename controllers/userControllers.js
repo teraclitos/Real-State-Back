@@ -70,7 +70,9 @@ exports.loginUser = async (req, res) => {
       },
     };
 
-    const token = jwt.sign(datosUsuarioParaToken, process.env.JWT_SECRET);
+    const token = jwt.sign(datosUsuarioParaToken, process.env.JWT_SECRET, {
+      expiresIn: "35s",
+    });
     userExist.token = token;
     await userModel.updateOne({ username }, userExist);
     res.status(200).json({ token: userExist.token });
