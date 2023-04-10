@@ -5,6 +5,7 @@ module.exports = (role) => async (req, res, next) => {
   try {
     const token = req.header("authorization").replace("Bearer ", "");
     const verify = jwt.verify(token, process.env.JWT_SECRET);
+
     const userLogin = await UserModel.findOne({ _id: verify.user.id, token });
 
     if (userLogin.role !== role && !Array.isArray(role)) {
